@@ -8,13 +8,15 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
 import { Screen2Component } from './screen2/screen2.component';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 @NgModule({
     imports: [
         CommonModule,
         LayoutRoutingModule,
         MaterialModule,
-        TranslateModule
+        TranslateModule,
+        MatTableExporterModule,
     ],
     declarations: [
         Screen2Component,

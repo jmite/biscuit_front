@@ -29,6 +29,7 @@
         "@ngx-translate/http-loader": "4.0.0",
         "chart.js": "2.9.3",
         "core-js": "3.6.5",
+        "mat-table-exporter": "^9.1.0",
         "ng2-charts": "2.3.0",
         "rxjs": "6.5.5",
         "web-animations-js": "^2.3.2",

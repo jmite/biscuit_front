@@ -1,3 +1,70 @@
 <p>
-  screen1 works!
+  Reporte Ventas Mensual
 </p>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha corte</mat-label>
+    <input matInput [matDatepicker]="picker"
+           (dateInput)="addEvent('input', $event)" disabled>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker disabled="false"></mat-datepicker>
+  </mat-form-field>
+</div>
+
+
+<div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
+  <div fxFlex>
+    <mat-table matTableExporter [dataSource]="dataSource" class="mat-elevation-z8" #exporter="matTableExporter" [hiddenColumns]="[0]">
+
+      <ng-container matColumnDef="puntoventa">
+        <mat-header-cell *matHeaderCellDef> Punto de venta  </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.centro_costo}} </mat-cell>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="dia">
+        <mat-header-cell *matHeaderCellDef> Dia </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.total_dia | currency}} </mat-cell>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="mes">
+        <mat-header-cell *matHeaderCellDef> Mes </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.total_mes | currency}}  </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="pptomes">
+        <mat-header-cell *matHeaderCellDef> Ppto mes  </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.ppto_mes | currency}} </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="dif">
+        <mat-header-cell *matHeaderCellDef> Dif </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.dif | currency }} </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="cump">
+        <mat-header-cell *matHeaderCellDef> % Cump </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.cumpl }} </mat-cell>
+      </ng-container>
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    
+    <div *ngIf="loading" 
+       style="display: flex; justify-content: center; align-items: center; background: white;">
+      <mat-progress-spinner 
+        color="primary" 
+        diameter="50"
+        mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+  </div>
+  <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'test', sheet: 'sheet_name', Props: {Author: 'Talha'}})">Excel</button>
+</div>
+
+
+
+

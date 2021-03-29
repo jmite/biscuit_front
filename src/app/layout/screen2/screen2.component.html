@@ -1,32 +1,39 @@
 <p>Reporte Ventas Comparativo</p>
 
+<div class="mb-20" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+  <div fxFlex>
+    <div class="form-group row">
+      <mat-form-field  appearance="fill">
+          <mat-label>Fecha desde</mat-label>
+              <input matInput [matDatepicker]="picker1"
+                  (dateInput)="addEvent('input', $event)" disabled>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxflex>
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha hasta</mat-label>
+      <input matInput [matDatepicker]="picker"
+              (dateInput)="addEvent2('input', $event)" disabled>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div fxflex>
+    <div class="example-button-row">
+      <button mat-raised-button (click)="consultarReporte()">Consultar</button>
+      <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'ventasComparativo', sheet: 'sheet_name', Props: {Author: 'devSkyrock'}})">Excel</button>
+    </div>
+  </div>
+  
+</div>
+
+
 <div class="col-12">
     <mat-card class="example-card">
         <mat-card-content>
-            <div class="row">
-                <div class="form-group row">
-                    <mat-form-field  appearance="fill">
-                        <mat-label>Fecha desde</mat-label>
-                            <input matInput [matDatepicker]="picker1"
-                                (dateInput)="addEvent('input', $event)" disabled>
-                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                            <mat-datepicker #picker1 disabled="false"></mat-datepicker>
-                    </mat-form-field>
-                </div>
-            </div>
-    
-            <div>
-            <mat-form-field appearance="fill">
-                <mat-label>Fecha hasta</mat-label>
-                <input matInput [matDatepicker]="picker"
-                        (dateInput)="addEvent2('input', $event)" disabled>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker disabled="false"></mat-datepicker>
-            </mat-form-field>
-            </div>
-            <div class="example-button-row">
-                <button mat-raised-button (click)="consultarReporte()">Consultar</button>
-            </div>
             <div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
               <div fxFlex>
                 <mat-table matTableExporter [dataSource]="dataSource" class="mat-elevation-z8" #exporter="matTableExporter">
@@ -78,7 +85,6 @@
              </div>   
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'test', sheet: 'sheet_name', Props: {Author: 'Talha'}})">Excel</button>
         </mat-card-actions>
     </mat-card>
 </div>

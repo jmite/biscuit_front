@@ -1,6 +1,6 @@
 <div class="login-page">
     <div class="content">
-        <form [formGroup]="formulario" class="login-form" fxFlex  >
+        <form [formGroup]="formulario" class="login-form" fxFlex (submit)="onSubmit()">
             <div class="text-center">
                 <h2 class="app-name">Bisuit FrontEnd</h2>
             </div>
@@ -23,7 +23,7 @@
             </div>
             <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
                 <div fxFlexFill>
-                    <button mat-raised-button color="primary" class="w-100" (click)="onLogin()">Login</button>
+                    <button mat-raised-button color="primary" class="w-100" type="submit">Ingresar</button>
                 </div>
             </div>
 

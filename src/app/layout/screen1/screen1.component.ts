@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
 import { Parametro } from 'src/app/dominio/utils/parametro.entity';
 import { DateUtil } from 'src/app/infraestructura/transversal/utils/date-util';
 import { VentasMensualesResponse } from 'src/app/presentacion/agentesservicio/dto/reporteVentasMensualesdto';
@@ -13,12 +15,34 @@ import { ReporteAgenteService } from 'src/app/presentacion/agentesservicio/repor
 export class Screen1Component implements OnInit {
 
   loading = false;
+  mostrar_grafico = false;
   events: string[] = [];
   fecha: any;
   response: VentasMensualesResponse;
   filtros_request: Parametro[] = [];
   displayedColumns: string[] = ['puntoventa', 'dia', 'mes', 'pptomes', 'dif', 'cump'];
   dataSource = null;
+
+
+  /* Charts info */
+
+  public lineChartData: ChartDataSets[] =  [
+    { data: [], label: 'Ventas Mensuales' },
+  ];
+  public lineChartLabels: Label[] =  [];//['January', 'February', 'March', 'April', 'May', 'June', 'July'];;
+  public lineChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public lineChartColors: Color[] = [
+    {
+      borderColor: 'black',
+      backgroundColor: 'rgb(63, 81, 181)',
+    },
+  ];
+  public lineChartLegend = true;
+  public lineChartType = 'line';
+  public lineChartPlugins = [];
+  public valores = [];
 
   constructor(private _reporteService: ReporteAgenteService) { }
 
@@ -27,14 +51,18 @@ export class Screen1Component implements OnInit {
 
   async consultarVentas(filtros: Parametro[]) {
     console.log('consultandooo')
+    this.lineChartLabels = []
+    this.lineChartData = []
+    this.valores = []
     this.dataSource = null;
     this.loading = true;
+    this.mostrar_grafico = false;
     this._reporteService.obtenerVentasMensuales(filtros).subscribe(
       data => {
         this.loading = false;
         this.response = data;
         this.dataSource = this.response.detalles;
-      
+        this.procesarGrafico(this.response.detalles);
       },
       error => {
         this.loading = false;
@@ -47,6 +75,18 @@ export class Screen1Component implements OnInit {
             break;
         }
       });
+  }
+
+  procesarGrafico(detalles :any){
+
+    detalles.forEach(element => {
+        if (element.centro_costo != 'TOTALES'){
+          this.lineChartLabels.push(element.centro_costo);
+          this.valores.push(element.total_mes)
+        }
+    });
+    this.lineChartData = [{ data : this.valores, label: 'Ventas Mensual'}]
+    this.mostrar_grafico = true;
   }
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {

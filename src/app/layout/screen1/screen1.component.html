@@ -1,15 +1,32 @@
-<p>
-  Reporte Ventas Mensual
-</p>
+<div class="mb-20" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+  <div fxFlex>
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha corte</mat-label>
+      <input matInput [matDatepicker]="picker"
+             (dateInput)="addEvent('input', $event)" disabled>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </div>
 
-<div>
-  <mat-form-field appearance="fill">
-    <mat-label>Fecha corte</mat-label>
-    <input matInput [matDatepicker]="picker"
-           (dateInput)="addEvent('input', $event)" disabled>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker disabled="false"></mat-datepicker>
-  </mat-form-field>
+  <div fxflex>
+    <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'test', sheet: 'sheet_name', Props: {Author: 'Talha'}})">Excel</button>
+  </div>
+
+</div>
+
+<div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
+  <div *ngIf="mostrar_grafico">
+    <canvas baseChart width="600" height="200"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [plugins]="lineChartPlugins">
+    </canvas>
+  </div>
 </div>
 
 
@@ -62,7 +79,6 @@
       </mat-progress-spinner>
     </div>
   </div>
-  <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'test', sheet: 'sheet_name', Props: {Author: 'Talha'}})">Excel</button>
 </div>
 
 

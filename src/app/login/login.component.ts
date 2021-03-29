@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
     formulario: FormGroup;
     loading = false;
     mensaje: string;
+    submited: boolean;
 
     constructor(private router: Router,
                 private globalData: GlobalService,
@@ -29,8 +30,15 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() { }
 
-    async onLogin() {
+    async onSubmit() {
+        console.log("asdasdasd");
         this.mensaje = '';
+        this.submited = true;
+
+        if (this.formulario.invalid) {
+          return;
+        }
+
         try
         {
 
@@ -58,6 +66,7 @@ export class LoginComponent implements OnInit {
 
         }catch(error){
             this.loading = false;
+            this.submited = false;
             if (error instanceof HttpErrorResponse){
                 this.mensaje = error.error.detail;
                 switch(error.status){

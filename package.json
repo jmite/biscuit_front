@@ -31,6 +31,8 @@
         "ability": "0.0.3",
         "chart.js": "2.9.3",
         "core-js": "3.6.5",
+        "jspdf": "^1.5.3",
+        "jspdf-autotable": "^3.5.14",
         "mat-table-exporter": "^9.1.0",
         "ng2-charts": "^2.3.0",
         "rxjs": "6.5.5",

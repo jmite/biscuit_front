@@ -25,9 +25,9 @@
     <div class="example-button-row">
       <button mat-raised-button (click)="consultarReporte()">Consultar</button>
       <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'ventasComparativo', sheet: 'sheet_name', Props: {Author: 'devSkyrock'}})">Excel</button>
+      <button mat-raised-button (click)="downloadPDF()">Pdf</button>
     </div>
   </div>
-  
 </div>
 
 

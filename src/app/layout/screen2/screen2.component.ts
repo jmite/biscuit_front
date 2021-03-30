@@ -4,6 +4,8 @@ import { Parametro } from 'src/app/dominio/utils/parametro.entity';
 import { DateUtil } from 'src/app/infraestructura/transversal/utils/date-util';
 import { VentasComparativoResponse } from 'src/app/presentacion/agentesservicio/dto/reporteVentasComparativodto';
 import { ReporteAgenteService } from 'src/app/presentacion/agentesservicio/reporte-agente.service';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 
 @Component({
   selector: 'app-screen2',
@@ -17,6 +19,8 @@ export class Screen2Component implements OnInit {
   displayedColumns: string[] = ['tienda', 'anio_actual', 'anio_anterior', 'dif', 'anios_atras', 'dif_anterior'];
   dataSource = null;
   response: VentasComparativoResponse;
+  fecha_1: any;
+  fecha_2:any;
 
 
   constructor(private _reporteService: ReporteAgenteService) { }
@@ -52,6 +56,7 @@ export class Screen2Component implements OnInit {
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     if(event.value){
       const string = DateUtil.toString(event.value);
+      this.fecha_1 = string;
       console.log(string)
       console.log('finalizaddodoo fechaa1111')
       const param = new Parametro("fecha_inicio", string);
@@ -64,6 +69,7 @@ export class Screen2Component implements OnInit {
   addEvent2(type: string, event: MatDatepickerInputEvent<Date>) {
     if(event.value){
       const string = DateUtil.toString(event.value);
+      this.fecha_2 = string;
       console.log(string)
       console.log('finalizaddodoo fechaa2222')
       const param = new Parametro("fecha_fin", string);
@@ -71,6 +77,37 @@ export class Screen2Component implements OnInit {
       //this.consultarVentas(this.filtros_request);
     }
     console.log('fecha cambiada')
+  }
+
+  
+  public downloadPDF(): void {
+    const doc = new jsPDF()
+
+    let lista = []
+    this.response.detalles.forEach(element => {
+        const detalle = [];
+        detalle.push(element.centro_costo);
+        detalle.push(element.valor_1);
+        detalle.push(element.valor_2);
+        detalle.push(element.porc_anterior);
+        detalle.push(element.valor_3);
+        detalle.push(element.porc_anterior_anio);
+        lista.push(detalle);
+    });
+
+    console.log(lista)
+
+    // Or use javascript directly:
+    doc.text('Reporte de ventas comparativo ', 75, 45);
+    doc.text('Desde: '+this.fecha_1+' Hasta:'+this.fecha_2, 70, 55);
+    doc.autoTable({
+      head: [['Tienda', 'Año actual ', 'Año anterior', 'Dif', 'Año atras', 'dif anterior']],
+      body: lista,
+      startX: 15,
+      startY: 60,
+    })
+
+    doc.save('ventas_comparativo.pdf')
   }
 
 

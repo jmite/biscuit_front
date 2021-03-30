@@ -6,6 +6,8 @@ import { Parametro } from 'src/app/dominio/utils/parametro.entity';
 import { DateUtil } from 'src/app/infraestructura/transversal/utils/date-util';
 import { VentasMensualesResponse } from 'src/app/presentacion/agentesservicio/dto/reporteVentasMensualesdto';
 import { ReporteAgenteService } from 'src/app/presentacion/agentesservicio/reporte-agente.service';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 
 @Component({
   selector: 'app-screen1',
@@ -77,6 +79,39 @@ export class Screen1Component implements OnInit {
       });
   }
 
+  public downloadPDF(): void {
+    const doc = new jsPDF()
+
+    // It can parse html:
+    // <table id="my-table"><!-- ... --></table>
+    //doc.autoTable({ html: '#my-table' })
+
+    let lista = []
+    this.response.detalles.forEach(element => {
+        const detalle = [];
+        detalle.push(element.centro_costo);
+        detalle.push(element.total_dia);
+        detalle.push(element.total_mes);
+        detalle.push(element.ppto_mes);
+        detalle.push(element.dif);
+        detalle.push(element.cumpl);
+        lista.push(detalle);
+    });
+
+    console.log(lista)
+
+    // Or use javascript directly:
+    doc.text('Reporte de ventas diarias '+ this.fecha, 75, 45);
+    doc.autoTable({
+      head: [['Punto de venta', 'Dia ', 'Mes', 'Ppto mes', 'Dif', '& cumpl']],
+      body: lista,
+      startX: 15,
+      startY: 60,
+    })
+
+    doc.save('ventas_mensual.pdf')
+  }
+
   procesarGrafico(detalles :any){
 
     detalles.forEach(element => {
@@ -92,6 +127,7 @@ export class Screen1Component implements OnInit {
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     if(event.value){
       const string = DateUtil.toString(event.value);
+      this.fecha = string;
       console.log(string)
       console.log('finalizaddodoo fechaa')
       this.filtros_request = []

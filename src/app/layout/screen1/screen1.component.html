@@ -12,9 +12,11 @@
   <div fxflex>
     <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'ventasMensual', sheet: 'sheet_name', Props: {Author: 'devSkyrock'}})">Excel</button>
   </div>
+  <div fxflex>
+    <button mat-raised-button (click)="downloadPDF()">Pdf</button>
+  </div>
 
 </div>
-
 <div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
   <div *ngIf="mostrar_grafico">
     <canvas baseChart width="600" height="200"
@@ -32,7 +34,7 @@
 
 <div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
   <div fxFlex>
-    <mat-table matTableExporter [dataSource]="dataSource" class="mat-elevation-z8" #exporter="matTableExporter">
+    <mat-table matTableExporter [dataSource]="dataSource" class="mat-elevation-z8" #exporter="matTableExporter" id="my-table">
 
       <ng-container matColumnDef="puntoventa">
         <mat-header-cell *matHeaderCellDef> Punto de venta  </mat-header-cell>

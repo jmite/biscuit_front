@@ -22,7 +22,7 @@ export class Screen1Component implements OnInit {
   fecha: any;
   response: VentasMensualesResponse;
   filtros_request: Parametro[] = [];
-  displayedColumns: string[] = ['puntoventa', 'dia', 'mes', 'pptomes', 'dif', 'cump'];
+  displayedColumns: string[] = ['puntoventa', 'dia', 'ticketdia', 'mes', 'ticketmes', 'pptomes', 'dif', 'cump'];
   dataSource = null;
 
 

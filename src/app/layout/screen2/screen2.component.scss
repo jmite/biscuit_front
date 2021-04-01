@@ -1,26 +1,21 @@
-.mat-card {
-    text-align: center;
-    img {
-        border-radius: 5px;
-        margin-top: -25px;
-    }
-}
-
-.example-container {
-    display: flex;
-    flex-direction: column;
-    max-height: 500px;
-    min-width: 300px;
-    margin-bottom: 10px;
-  }
-  
 .mat-table {
-overflow: auto;
-text-align: left;
-height: auto;
-}
-  
+    overflow-x: scroll;
+  }
 
-.mb-20 {
-    margin-bottom: 20px;
+.mat-cell,
+.mat-header-cell {
+  word-wrap: initial;
+  font-size: medium;  
+  font-weight: bold;
+  display: table-cell;
+  padding: 0px 50px;
+  line-break: unset;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.mat-row,
+.mat-header-row {
+  display: table-row;
 }

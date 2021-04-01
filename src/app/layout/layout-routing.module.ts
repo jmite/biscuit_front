@@ -19,11 +19,11 @@ const routes: Routes = [
                 loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
             },
             {
-                path: 'screen1',
+                path: 'ventas-mensuales',
                 loadChildren: () => import('./screen1/screen1.module').then(m => m.Screen1Module)
             },
             {
-                path: 'screen2',
+                path: 'ventas-comparativo',
                 component: Screen2Component
             }
         ]

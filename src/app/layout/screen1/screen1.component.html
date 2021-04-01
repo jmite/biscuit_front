@@ -19,7 +19,7 @@
 </div>
 <div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
   <div *ngIf="mostrar_grafico">
-    <canvas baseChart width="600" height="200"
+    <canvas baseChart width="600" height="300"
       [datasets]="lineChartData"
       [labels]="lineChartLabels"
       [options]="lineChartOptions"
@@ -46,11 +46,21 @@
         <mat-header-cell *matHeaderCellDef> Dia </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.total_dia | currency}} </mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="ticketdia">
+        <mat-header-cell *matHeaderCellDef> Ticket Dia </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.ticket_promedio_dia | currency}} </mat-cell>
+      </ng-container>
     
       <!-- Weight Column -->
       <ng-container matColumnDef="mes">
         <mat-header-cell *matHeaderCellDef> Mes </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.total_mes | currency}}  </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="ticketmes">
+        <mat-header-cell *matHeaderCellDef> Ticket mes </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.ticket_promedio_mes | currency}}  </mat-cell>
       </ng-container>
     
       <ng-container matColumnDef="pptomes">

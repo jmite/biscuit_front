@@ -1,13 +1,22 @@
-.example-container {
-    display: flex;
-    flex-direction: column;
-    max-height: 500px;
-    min-width: 300px;
-    margin-bottom: 10px;
-  }
-  
 .mat-table {
-overflow: auto;
-height: auto;
+  overflow-x: scroll;
+  box-shadow: blue;
 }
-  
+
+.mat-cell,
+.mat-header-cell {
+word-wrap: initial;
+font-size: medium;
+font-weight: bold;
+display: table-cell;
+padding: 0px 50px;
+line-break: unset;
+width: 100%;
+white-space: nowrap;
+overflow: hidden;
+vertical-align: middle;
+}
+.mat-row,
+.mat-header-row {
+display: table-row;
+}

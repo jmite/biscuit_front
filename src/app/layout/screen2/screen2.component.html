@@ -34,8 +34,7 @@
 <div class="col-12">
     <mat-card class="example-card">
         <mat-card-content>
-            <div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
-              <div fxFlex>
+            <div class="table-responsive">
                 <mat-table matTableExporter [dataSource]="dataSource" class="mat-elevation-z8" #exporter="matTableExporter">
                   <ng-container matColumnDef="tienda">
                     <mat-header-cell *matHeaderCellDef> Tienda </mat-header-cell>
@@ -81,7 +80,6 @@
                     mode="indeterminate">
                   </mat-progress-spinner>
                 </div>
-              </div>
              </div>   
         </mat-card-content>
         <mat-card-actions>

@@ -64,7 +64,7 @@ export class Screen1Component implements OnInit {
         this.loading = false;
         this.response = data;
         this.dataSource = this.response.detalles;
-        this.procesarGrafico(this.response.detalles);
+        //this.procesarGrafico(this.response.detalles);
       },
       error => {
         this.loading = false;

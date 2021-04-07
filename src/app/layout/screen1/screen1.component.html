@@ -17,7 +17,7 @@
   </div>
 
 </div>
-<div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
+<!--div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
   <div *ngIf="mostrar_grafico">
     <canvas baseChart width="600" height="300"
       [datasets]="lineChartData"
@@ -29,11 +29,10 @@
       [plugins]="lineChartPlugins">
     </canvas>
   </div>
-</div>
+</div-->
 
 
-<div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
-  <div fxFlex>
+<div class="table-responsive">
     <mat-table matTableExporter [dataSource]="dataSource" class="mat-elevation-z8" #exporter="matTableExporter" id="my-table">
 
       <ng-container matColumnDef="puntoventa">
@@ -90,7 +89,6 @@
         mode="indeterminate">
       </mat-progress-spinner>
     </div>
-  </div>
 </div>
 
 
